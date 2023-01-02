@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 class MaxMind():
-    download_key="7PYKLi8HXh9KEBs9"
+    download_key="00000000000"
     timestamp=datetime.now(timezone.utc).strftime('%Y%m%d')
     tmp_dir="./maxmind/tmp"
     db_dir="./maxmind/database"
@@ -11,6 +11,7 @@ class MaxMind():
     download_file_extension='zip'
     gl2_country_blocks_ipv4='GeoLite2-Country-Blocks-IPv4.csv'
     gl2_country_location_en='GeoLite2-Country-Locations-en.csv'
+    last_error=""
 
     def makeDir(self, path):
         dir=Path(path)
@@ -47,9 +48,11 @@ class MaxMind():
             response=requests.get(download_file_url)
 
             if not response.status_code == 200:
+                self.last_error="Download error - Check your download key"
                 return False
 
             if not download_file_path.write_bytes(response.content):
+                self.last_error="Error saving data"
                 return False
 
             with zipfile.ZipFile(download_file_path) as z:
