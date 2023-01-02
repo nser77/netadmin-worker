@@ -3,11 +3,11 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 class MaxMind():
-    download_key="00000000000"
+    download_key="00000000"
     timestamp=datetime.now(timezone.utc).strftime('%Y%m%d')
+    root_dir="./maxmind"
     tmp_dir="./maxmind/tmp"
     db_dir="./maxmind/database"
-    extract_db_dir="./maxmind/database/{}".format(timestamp)
     download_file_extension='zip'
     gl2_country_blocks_ipv4='GeoLite2-Country-Blocks-IPv4.csv'
     gl2_country_location_en='GeoLite2-Country-Locations-en.csv'
@@ -35,10 +35,10 @@ class MaxMind():
         return geoip_db_file
 
     def getCsvDB(self):
-        self.makeDir('./maxmind')
-        tmp_dir=self.makeDir('./maxmind/tmp')
-        db_dir=self.makeDir('./maxmind/database')
-        extract_db_dir=self.makeDir('./maxmind/database/{}'.format(self.timestamp))
+        self.makeDir(self.root_dir)
+        tmp_dir=self.makeDir(self.tmp_dir)
+        db_dir=self.makeDir(self.db_dir)
+        extract_db_dir=self.makeDir("{}/{}".format(db_dir, self.timestamp))
 
         if not self.autodiscoveryCsvDB(extract_db_dir, self.gl2_country_blocks_ipv4):
             download_file_name=Path('{}.{}'.format(self.timestamp, self.download_file_extension))
