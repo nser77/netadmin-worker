@@ -10,7 +10,6 @@ class MaxMind():
     db_dir="./maxmind/database"
     download_file_extension='zip'
     gl2_country_blocks_ipv4='GeoLite2-Country-Blocks-IPv4.csv'
-    gl2_country_location_en='GeoLite2-Country-Locations-en.csv'
     last_error=""
 
     def makeDir(self, path):
@@ -59,10 +58,7 @@ class MaxMind():
                 for file in z.namelist():
                     if self.gl2_country_blocks_ipv4 in file:
                         z.extract(file, extract_db_dir)
-                    if self.gl2_country_location_en in file:
-                        z.extract(file, extract_db_dir)
 
         self.gl2_country_blocks_ipv4_db = self.autodiscoveryCsvDB(extract_db_dir, self.gl2_country_blocks_ipv4)
-        self.gl2_country_location_en_db = self.autodiscoveryCsvDB(extract_db_dir, self.gl2_country_location_en)
 
         return True
