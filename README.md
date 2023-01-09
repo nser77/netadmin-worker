@@ -5,7 +5,7 @@ Before installation, make sure that your system has the following packages insta
 
 ```
 root@ubuntu:/opt# apt-get update
-root@ubuntu:/opt# apt-get install python3-venv
+root@ubuntu:/opt# apt-get install git python3-venv
 ```
 
 ## Installation
