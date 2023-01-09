@@ -39,7 +39,7 @@ class MaxMind():
         db_dir=self.makeDir(self.db_dir)
         extract_db_dir=self.makeDir("{}/{}".format(db_dir, self.timestamp))
 
-        if not self.autodiscoveryCsvDB(extract_db_dir, self.gl2_country_blocks_ipv4):
+        if not self.autodiscoveryCsvDB(extract_db_dir, self.gl2_country_blocks_ipv4) == False:
             download_file_name=Path('file.{}'.format(self.download_file_extension))
             download_file_path=tmp_dir / download_file_name
             download_file_url='https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country-CSV&license_key={}&suffix={}'.format(self.download_key,self.download_file_extension)
